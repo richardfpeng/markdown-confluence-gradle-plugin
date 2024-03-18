@@ -90,6 +90,13 @@ is translated to the following Confluence wiki:
 Plus the **pics/picture.jpg** file (relative to the Markdown file) is added as an attachment (named **picture.jpg**)
 to the generated Confluence page and correctly linked.
 
+## Attachments.
+Similar to inline images.
+
+```text
+![attachment](attachment/file/path)
+```
+
 
 ### Description of config parameters
 

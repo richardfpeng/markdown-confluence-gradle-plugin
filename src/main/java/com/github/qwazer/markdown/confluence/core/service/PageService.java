@@ -61,7 +61,7 @@ public class PageService {
     // present on the build server in case you want to automate publishing of wiki pages during your CI builds.
     public Pair<String, List<Path>> prepareWikiText(ConfluenceExtension.Page page, Map<String, String> pageVariables) throws IOException {
 
-        final String markdownText = page.getContent();
+        String markdownText = page.getContent();
 
         final List<Path> inlineImages = new ArrayList<>();
         final Matcher matcher = INLINE_IMAGE_PATTERN.matcher(markdownText);
@@ -81,6 +81,9 @@ public class PageService {
                 } else {
                     path = Paths.get(uri);
                 }
+
+                System.out.println(path.toAbsolutePath());
+
                 if (Files.exists(path)) {
                     inlineImages.add(path);
                 } else {
@@ -88,6 +91,11 @@ public class PageService {
                         String.format("Could not find local image '%s' referenced in the '%s' markdown file", path, page.getSrcFile());
                     throw new ConfluenceException(message);
                 }
+            }
+
+            if (matcher.group(1).equals("attachment")) {
+                LOG.info("Remove attachment block. " + matcher.group(0));
+                markdownText = markdownText.replace(matcher.group(0), "");
             }
         }
 
