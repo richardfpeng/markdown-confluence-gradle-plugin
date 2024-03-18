@@ -10,6 +10,7 @@ group 'com.github.qwazer'
 description 'A plugin for publishing markdown or confluence wiki files to an Atlassian Confluence server'
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 

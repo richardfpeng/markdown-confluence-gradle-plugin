@@ -119,6 +119,7 @@ public class ConfluenceGradleTask extends DefaultTask {
         // Publishing pages
         extension.getPages().forEach(page -> {
             try {
+                System.out.println(page.getTitle());
                 pageService.publishWikiPage(page, pageVariables);
             } catch (IOException e) {
                 throw new RuntimeException(e);
